@@ -1,11 +1,12 @@
 import {inject} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, map, of, switchMap} from 'rxjs';
+import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {authActions} from './actions';
 import {CurrentUserInterface} from '../../shared/types/currentUser.interface';
 import {AuthService} from '../services/auth.services';
 import {HttpErrorResponse} from '@angular/common/http';
 import { PersistenceService } from '../../shared/services/persistence.service';
+import { Router } from '@angular/router';
 
 export const registerEffect = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService), persistenceService = inject(PersistenceService)) => {
@@ -30,3 +31,14 @@ export const registerEffect = createEffect(
   },
   {functional: true}
 );
+
+export const redirectAfterRegisterEffect = createEffect(
+    (actions$ = inject(Actions), router = inject(Router)) =>{
+        return actions$.pipe(
+            ofType(authActions.registerSuccess),
+            tap(() => { router.navigateByUrl('/')
+        })
+        )
+    }, 
+    {functional: true, dispatch: false}
+)
