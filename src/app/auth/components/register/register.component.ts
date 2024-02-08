@@ -1,12 +1,11 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Store} from '@ngrx/store';
-import {register} from '../../store/actions';
+import {authActions} from '../../store/actions';
 import {RegisterRequestInterface} from '../../types/registerRequest.interface';
 import {RouterLink} from '@angular/router';
-import {AuthStateInterface} from '../../types/authState.interface';
-import { CommonModule } from '@angular/common';
-import { selectIsSubmitting } from '../../store/reducers';
+import {CommonModule} from '@angular/common';
+import {selectIsSubmitting} from '../../store/reducers';
 
 @Component({
   selector: 'mc-register',
@@ -16,7 +15,7 @@ import { selectIsSubmitting } from '../../store/reducers';
 })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
-  private store = inject(Store<{auth: AuthStateInterface}>);
+  private store = inject(Store);
 
   isSubmitting$ = this.store.select(selectIsSubmitting);
   form = this.fb.nonNullable.group({
@@ -30,6 +29,6 @@ export class RegisterComponent {
     const request: RegisterRequestInterface = {
       user: this.form.getRawValue(),
     };
-    this.store.dispatch(register({request}));
+    this.store.dispatch(authActions.register({request}));
   }
 }
