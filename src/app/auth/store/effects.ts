@@ -5,14 +5,16 @@ import {authActions} from './actions';
 import {CurrentUserInterface} from '../../shared/types/currentUser.interface';
 import {AuthService} from '../services/auth.services';
 import {HttpErrorResponse} from '@angular/common/http';
+import { PersistenceService } from '../../shared/services/persistence.service';
 
 export const registerEffect = createEffect(
-  (actions$ = inject(Actions), authService = inject(AuthService)) => {
+  (actions$ = inject(Actions), authService = inject(AuthService), persistenceService = inject(PersistenceService)) => {
     return actions$.pipe(
       ofType(authActions.register),
       switchMap(({request}) => {
         return authService.register(request).pipe(
           map((currentUser: CurrentUserInterface) => {
+            persistenceService.set('accessToken', currentUser.token);
             return authActions.registerSuccess({currentUser});
           }),
           catchError((error: HttpErrorResponse) => {
