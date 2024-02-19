@@ -1,33 +1,27 @@
-@if (data$ | async; as data) {
-    @if(data.isLoading) {
-        <div>Loading...</div>
-    
-    }@else if(data.error){
-        <div>{{data.error}}</div>
-    }
-    @if (data.feed) {
-        @for (article of data.feed.articles; track $index) {
-            <div class="article-preview">
-                <div class="article-meta">
-                    <a [routerLink]="['/profiles', article.author.username]">
-                        <img [src]="article.author.image">
-                    </a>
-                    <div class="info">
-                        <a [routerLink]="['/profiles', article.author.username]">
-                            {{article.author.username}}
-                        </a>
-                        <span class="date">{{article.createdAt}}</span>
-                    </div>
-                    <div class="pull-xs-right">ADD To Favorites</div>
-                </div>
-                <a [routerLink]="['/articles', article.slug]" class="preview-link" >
-                    <h1>{{article.title}}</h1>
-                    <p>{{article.description}}</p>
-                    <span>Read more...</span>
-                    TAG LIST
-                </a>
-            </div>
-            PAGINATION
-        }
-    }
-}
+@if (data$ | async; as data) { @if(data.isLoading) {
+<mc-loading-message></mc-loading-message>
+
+}@else if(data.error){
+<mc-error-message [message]="data.error"></mc-error-message>
+} @if (data.feed) { @for (article of data.feed.articles; track $index) {
+<div class="article-preview">
+  <div class="article-meta">
+    <a [routerLink]="['/profiles', article.author.username]">
+      <img [src]="article.author.image" />
+    </a>
+    <div class="info">
+      <a [routerLink]="['/profiles', article.author.username]">
+        {{ article.author.username }}
+      </a>
+      <span class="date">{{ article.createdAt }}</span>
+    </div>
+    <div class="pull-xs-right">ADD To Favorites</div>
+  </div>
+  <a [routerLink]="['/articles', article.slug]" class="preview-link">
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.description }}</p>
+    <span>Read more...</span>
+    TAG LIST
+  </a>
+</div>
+PAGINATION } } }

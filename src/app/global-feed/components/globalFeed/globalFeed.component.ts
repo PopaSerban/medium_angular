@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 import { FeedComponent } from "../../../shared/components/feed/feed.component";
-
+import { BannerComponent } from "../../../shared/components/banner/banner.component";
+import { ErrorMessageComponent } from "../../../shared/components/errorMessage/error-message.component";
 @Component({
-    selector:'mc-global-feed',
+    selector: 'mc-global-feed',
     templateUrl: './globalFeed.component.html',
     standalone: true,
-    imports: [FeedComponent],
+    imports: [FeedComponent, BannerComponent, ErrorMessageComponent]
 })
 export class GlobalFeedComponent{
     apiUrl = "/articles";
