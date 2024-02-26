@@ -14,5 +14,15 @@ export const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./global-feed/globalFeed.routes').then((m) => m.routes),
+  },
+  {
+    path: 'feed',
+    loadChildren: () =>
+      import('./your-feed/yourFeed.routes').then((m) => m.routes),
+  },
+  {
+    path: 'tags/:slug',
+    loadChildren: () =>
+      import('./tagFeed/tagFeed.routes').then((m) => m.routes),
   }
 ];
