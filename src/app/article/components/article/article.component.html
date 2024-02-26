@@ -22,7 +22,12 @@
           <i class="ion-edit"></i>
           Edit Article
         </a>
-        <button class="btn button-outline-danger btn-sm">Delete Article</button>
+        <button
+          class="btn button-outline-danger btn-sm"
+          (click)="deleteArticle()"
+        >
+          Delete Article
+        </button>
         }
       </div>
     </div>
@@ -30,20 +35,19 @@
   </div>
   <div class="container page">
     @if (data.isLoading) {
-        <mc-loading-message></mc-loading-message>
+    <mc-loading-message></mc-loading-message>
     }@else if (data.error) {
-        <mc-error-message></mc-error-message>
+    <mc-error-message></mc-error-message>
     }@else if(data.article) {
-        <div class="row article-content">
-            <div class="col-xs-12">
-                <div>
-                    <p>{{data.article.body}}</p>
-                </div>
-                <mc-tag-list [tags]="data.article.tagList"></mc-tag-list>
-            </div>
+    <div class="row article-content">
+      <div class="col-xs-12">
+        <div>
+          <p>{{ data.article.body }}</p>
         </div>
+        <mc-tag-list [tags]="data.article.tagList"></mc-tag-list>
+      </div>
+    </div>
     }
-
   </div>
 </div>
 }
