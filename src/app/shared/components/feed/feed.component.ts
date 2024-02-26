@@ -10,6 +10,7 @@ import {LoadingMessageComponent} from '../loadingMessage/loading-message.compone
 import {environment} from '../../../../environments/environment';
 import {PaginationComponent} from '../pagination/pagination.component';
 import queryString  from 'query-string';
+import { TagListComponent } from '../tagList/tag-list.component';
 
 @Component({
   selector: 'mc-feed',
@@ -21,6 +22,7 @@ import queryString  from 'query-string';
     ErrorMessageComponent,
     LoadingMessageComponent,
     PaginationComponent,
+    TagListComponent,
   ],
 })
 export class FeedComponent implements OnInit {

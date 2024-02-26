@@ -1,0 +1,18 @@
+@if (data$ | async; as data) {
+     @if (data.isLoading) {
+        <mc-loading-message></mc-loading-message>
+     }
+     @if (data.error) {
+        <mc-error-message [message]="data.error"></mc-error-message>
+     }
+     @if (data.popularTags) {
+        <div class="sidebar">
+            <p>Popular Tags </p>
+            <div class="tag-list">
+                @for (tag of data.popularTags; track $index) {
+                    <a class="tag-default tag-pill" [routerLink]="['/tags', tag]">{{ tag }}</a> 
+                }
+            </div>
+        </div>
+     } 
+}
