@@ -1,5 +1,5 @@
 import {inject} from '@angular/core';
-import {Actions, act, createEffect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, map, of, switchMap, tap} from 'rxjs';
 import {articleActions} from './actions';
 import {ArticleService as SharedArticleService} from '../../shared/services/article.service';
@@ -32,7 +32,7 @@ export const getArticleEffect = createEffect(
 export const deleteArticleEffect = createEffect(
   (actions$ = inject(Actions), articleService = inject(ArticleService)) => {
     return actions$.pipe(
-      ofType(articleActions.getArticle),
+      ofType(articleActions.deleteArticle),
       switchMap(({slug}) => {
         return articleService.deleteArticle(slug).pipe(
           map(() => {
