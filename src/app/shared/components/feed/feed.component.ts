@@ -18,19 +18,21 @@ import {environment} from '../../../../environments/environment';
 import {PaginationComponent} from '../pagination/pagination.component';
 import queryString from 'query-string';
 import {TagListComponent} from '../tagList/tag-list.component';
+import { AddToFavoritesComponent } from "../addToFavorites/addToFavorites.component";
 
 @Component({
-  selector: 'mc-feed',
-  templateUrl: './feed.component.html',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    ErrorMessageComponent,
-    LoadingMessageComponent,
-    PaginationComponent,
-    TagListComponent,
-  ],
+    selector: 'mc-feed',
+    templateUrl: './feed.component.html',
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterLink,
+        ErrorMessageComponent,
+        LoadingMessageComponent,
+        PaginationComponent,
+        TagListComponent,
+        AddToFavoritesComponent
+    ]
 })
 export class FeedComponent implements OnInit, OnChanges {
   private store = inject(Store);
