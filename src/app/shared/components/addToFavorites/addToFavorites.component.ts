@@ -1,5 +1,8 @@
+import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import {Component, Input} from '@angular/core';
+import { AddToFavoritesService } from './services/addToFavorites.service';
+import {Component, Input, inject} from '@angular/core';
+import { addToFavoritesActions } from './store/actions';
 
 @Component({
   selector: 'mc-add-to-favorites',
@@ -12,7 +15,11 @@ export class AddToFavoritesComponent {
   @Input() favoritesCount: number = 0;
   @Input() articleSlug: string = '';
 
+  private store = inject(Store)
+
   handleLike() {
+    this.store.dispatch(addToFavoritesActions.addToFavorites(
+      {isFavorited:this.isFavorited, slug: this.articleSlug}))
     if (this.isFavorited) {
       --this.favoritesCount;
     } else {
